@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BowlingBall : MonoBehaviour
 {
 
@@ -10,7 +11,7 @@ public class BowlingBall : MonoBehaviour
     public float throwStrength = 1f;
     private bool ballThrown = false;
     private Vector3 mousePos;
-    private float clampedMouseX;
+    public GameObject gameCamera;
 
     private void Start()
     {
@@ -21,11 +22,12 @@ public class BowlingBall : MonoBehaviour
     private void Update()
     {
         mousePos = Input.mousePosition;
-        clampedMouseX = Mathf.Clamp(mousePos.x, -100, 50);
+
         if (!ballThrown)
         {
             var pos = ballPosition.position;
-            pos.x = Mathf.Clamp(clampedMouseX, -2.3f, 2.3f);
+            pos.x = (mousePos.x / (Screen.width / 4f));
+            //Debug.Log(mousePos.x + " / " + Screen.width + " = " + pos.x);
             ballPosition.position = pos;
             
         }
@@ -33,6 +35,7 @@ public class BowlingBall : MonoBehaviour
         {
             ballThrown = true;
             ballPhysics.AddForce(0, 0, throwStrength);
+            //tell game camera to follow
         }
     }
 }

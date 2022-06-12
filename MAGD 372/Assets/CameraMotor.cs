@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraMotor : MonoBehaviour
 {
+
+    public Transform bowlingBall;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +18,7 @@ public class CameraMotor : MonoBehaviour
     {
         
     }
+
+    
+
 }
